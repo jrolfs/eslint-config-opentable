@@ -1,38 +1,117 @@
-/**
- * This file doesn't actually get run, just linted.
- */
-import fs from 'fs';
-import path from 'path';
-import base from './base';
+import test from 'tape';
+import outdent from '@jrolfs/outdent';
+import { CLIEngine } from 'eslint';
 
-function test() {}
+import eslintrc from '../';
 
-const files = {
-  base,
-  path,
-  fs
-};
+const cli = new CLIEngine({
+  useEslintrc: false,
+  baseConfig: eslintrc,
 
-fs.readdirSync(path.join(__dirname, '../rules')).forEach((name) => {
-  if (name === 'react.js') {
-    return;
+  rules: {
+    // It is okay to import devDependencies in tests.
+    'import/no-extraneous-dependencies': [2, { devDependencies: true }]
   }
-
-  files[name] = `../rules/${name}`;
 });
 
-Object.keys(files).forEach((name) => {
-  const config = files[name];
+function lint(text) {
+  // @see http://eslint.org/docs/developer-guide/nodejs-api.html#executeonfiles
+  // @see http://eslint.org/docs/developer-guide/nodejs-api.html#executeontext
+  const linter = cli.executeOnText(text);
+  return linter.results[0];
+}
 
-  test(`${name}: does not reference react`, (t) => {
+test('disallow "comma-dangle"', (tap) => {
+  tap.test('for dangle-less code', (t) => {
+    t.plan(3);
+
+    const result = lint(outdent`
+      const noDangle = {
+        foo: 'foo',
+        bar: {
+          bar: 'bar',
+          baz: 'baz'
+        }
+      };
+
+      export default noDangle;
+
+    `);
+
+    t.notOk(result.warningCount, 'no warnings');
+    t.notOk(result.errorCount, 'no errors');
+    t.deepEquals(result.messages, [], 'no messages in results');
+  });
+
+  tap.test('for dangle-y code', (t) => {
     t.plan(2);
 
-    t.notOk(config.plugins, 'plugins is unspecified');
+    const result = lint(outdent`
+      const noDangle = {
+        foo: 'foo',
+        bar: {
+          bar: 'bar',
+          baz: 'baz',
+        },
+      };
 
-    // scan rules for react/ and fail if any exist
-    const reactRuleIds = Object.keys(config.rules)
-      .filter(ruleId => ruleId.indexOf('react/') == null);
+      export default noDangle;
 
-    t.deepEquals(reactRuleIds, [], 'there are no react/ rules');
+    `);
+
+    t.ok(result.errorCount, 'fails');
+    t.equal(result.messages[0].ruleId, 'comma-dangle', 'fails due to dangle');
+  });
+});
+
+test('allow "$.Deferred"', (tap) => {
+  tap.test('for "$.Deferred" used as factory', (t) => {
+    t.plan(3);
+
+    const result = lint(outdent`
+      const deferred = $.Deferred(); // eslint-disable-line no-undef
+
+      export default deferred;
+
+    `);
+
+    t.notOk(result.warningCount, 'no warnings');
+    t.notOk(result.errorCount, 'no errors');
+    t.deepEquals(result.messages, [], 'no messages in results');
+  });
+});
+
+test('allow "cond-assign" in parenthesis', (tap) => {
+  tap.test('for conditional assignment wrapped in parenthesis', (t) => {
+    t.plan(3);
+
+    const result = lint(outdent`
+      let someNode = document.getElementById('#some-node'); // eslint-disable-line no-undef
+
+      do {
+        someNode.height = '100px';
+      } while ((someNode = someNode.parentNode) !== null);
+
+    `);
+
+    t.notOk(result.warningCount, 'no warnings');
+    t.notOk(result.errorCount, 'no errors');
+    t.deepEquals(result.messages, [], 'no messages in results');
+  });
+
+  tap.test('for conditional assignment not wrapped in parenthesis', (t) => {
+    t.plan(2);
+
+    const result = lint(outdent`
+      let someNode = document.getElementById('#some-node'); // eslint-disable-line no-undef
+
+      do {
+        someNode.height = '100px';
+      } while (someNode = someNode.parentNode !== null);
+
+    `);
+
+    t.ok(result.errorCount, 'fails');
+    t.equal(result.messages[0].ruleId, 'no-cond-assign', 'fails due to assignment in condition');
   });
 });

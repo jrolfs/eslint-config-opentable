@@ -4,7 +4,11 @@
   "description": "This package provides OpenTable's .eslintrc as an extensible shared config.",
   "main": "index.js",
   "scripts": {
-    "test": "eslint ."
+    "lint": "eslint .",
+    "pretest": "npm run --silent lint",
+    "test": "npm run --silent tests-only",
+    "tests-only": "babel-tape-runner ./test/*.js",
+    "travis": "npm run --silent test"
   },
   "repository": {
     "type": "git",
@@ -28,6 +32,10 @@
     "eslint-plugin-react": "^7.4.0"
   },
   "devDependencies": {
-    "eslint": "^4.9.0"
+    "@jrolfs/outdent": "^0.4.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-tape-runner": "^2.0.1",
+    "eslint": "^4.9.0",
+    "tape": "^4.8.0"
   }
 }

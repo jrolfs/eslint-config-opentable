@@ -1,5 +1,5 @@
 import test from 'tape';
-import outdent from '@jrolfs/outdent';
+import outdent from 'outdent';
 import { CLIEngine } from 'eslint';
 
 import eslintrc from '../';

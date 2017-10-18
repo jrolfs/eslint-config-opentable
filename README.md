@@ -7,7 +7,7 @@ This package provides OpenTable's .eslintrc as an extensible shared config. We e
 The export lints ES6/2015+ and React/JSX. It requires `eslint`.
 
 1. `npm install --save-dev eslint-config-opentable eslint`
-2. add `"extends": "opentable"` to your .eslintrc
+2. add `"extends": "opentable"` to your `.eslintrc`
 
 See [Airbnb's Javascript styleguide](https://github.com/airbnb/javascript) and
 the [ESlint config docs](http://eslint.org/docs/user-guide/configuring#extending-configuration-files)

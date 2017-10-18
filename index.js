@@ -6,15 +6,6 @@ module.exports = {
     // http://eslint.org/docs/rules/comma-dangle
     'comma-dangle': [2, 'never'],
 
-    // Neither required nor prohibited
-    // AirBnB used to enable this, but since
-    // changed their rule to prefer
-    // function declarations and arrow functions
-    // to avoid function expressions.
-    // There's no difference here, just a precaution.
-    // http://eslint.org/docs/rules/func-names
-    'func-names': 0,
-
     // Adds $.Deferred as an exception to the new-cap
     // rule, since it should not be used with new
     // http://eslint.org/docs/rules/new-cap

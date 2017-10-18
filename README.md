@@ -36,3 +36,4 @@ This repo doesn't change too often, so issues or requests may not be noticed qui
 
 - [Kalev Roomann-Kurrik](mailto:kroomannkurrik@opentable.com)
 - [Ward Ruth](mailto:wruth@opentable.com)
+- [Jamie Rolfs](mailto:jrolfs@opentable.com)

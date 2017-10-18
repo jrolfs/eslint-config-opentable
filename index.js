@@ -15,15 +15,6 @@ module.exports = {
     // http://eslint.org/docs/rules/func-names
     'func-names': 0,
 
-    // specify the maximum length of a line
-    // http://eslint.org/docs/rules/max-len
-    'max-len': [2, {
-      code: 120,
-      tabWidth: 2,
-      ignoreComments: true,
-      ignoreUrls: true
-    }],
-
     // Adds $.Deferred as an exception to the new-cap
     // rule, since it should not be used with new
     // http://eslint.org/docs/rules/new-cap

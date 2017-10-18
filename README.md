@@ -22,10 +22,6 @@ For support in Node <4, use eslint-config-opentable version 4.x.
 
 There are a few minor differences between this config and AirBnB's. Links are to AirBnB's styleguide.
 
-- [18.12](https://github.com/airbnb/javascript#whitespace--max-len) Max line length: 100 - **Increased to 120**
-
-  > Why? We just wanted to allow longer lines.
-
 - [19.2](https://github.com/airbnb/javascript#commas--dangling) Comma dangle - **No**
 
   > Why? We found the extra comma distracting.

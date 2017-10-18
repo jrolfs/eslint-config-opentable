@@ -6,11 +6,6 @@ module.exports = {
     // http://eslint.org/docs/rules/comma-dangle
     'comma-dangle': [2, 'never'],
 
-    // require the use of === and !==
-    // allow == null
-    // http://eslint.org/docs/rules/eqeqeq
-    eqeqeq: [2, 'allow-null'],
-
     // Neither required nor prohibited
     // AirBnB used to enable this, but since
     // changed their rule to prefer

@@ -1,4 +1,4 @@
-# eslint-config-opentable [![Build Status](https://travis-ci.org/opentable/eslint-config-opentable.svg?branch=master)](https://travis-ci.org/opentable/eslint-config-opentable) <a href="https://github.com/opentable/booking-flow"><img src="https://cdn.rawgit.com/jrolfs/3170488f7c979e0c1e6858932dbca5e0/raw/5056da0cc598bc45191eae9a638aa05fe6796d4e/ot-logo-complete.svg" align="right" height="38em"></a>
+# eslint-config-opentable [![Build Status](https://travis-ci.org/jrolfs/eslint-config-opentable.svg?branch=master)](https://travis-ci.org/jrolfs/eslint-config-opentable) <a href="https://github.com/opentable/booking-flow"><img src="https://cdn.rawgit.com/jrolfs/3170488f7c979e0c1e6858932dbca5e0/raw/5056da0cc598bc45191eae9a638aa05fe6796d4e/ot-logo-complete.svg" align="right" height="38em"></a>
 
 This package provides OpenTable's .eslintrc as an extensible shared config. We extend [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb).
 

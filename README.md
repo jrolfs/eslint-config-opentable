@@ -16,7 +16,7 @@ for more information.
 
 ## Dependencies
 
-Note that ESLint 3.0+, which is a dependency of this config, requires Node 4+.
+Note that ESLint 4.0+, which is a dependency of this config, requires Node 4+.
 For support in Node <4, use eslint-config-opentable version 4.x.
 
 ## Differences with AirBnB
